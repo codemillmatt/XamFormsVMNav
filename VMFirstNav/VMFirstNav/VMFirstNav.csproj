@@ -39,20 +39,23 @@
     <Compile Include="ViewModels\TabOneChildViewModel.cs" />
     <Compile Include="ViewModels\TabTwoViewModel.cs" />
     <Compile Include="ViewModels\TabTwoChildViewModel.cs" />
-    <Compile Include="Views\TabOneView.xaml.cs">
-      <DependentUpon>TabOneView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabOneChildView.xaml.cs">
-      <DependentUpon>TabOneChildView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabTwoView.xaml.cs">
-      <DependentUpon>TabTwoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabTwoChildView.xaml.cs">
-      <DependentUpon>TabTwoChildView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\RootTabPage.xaml.cs">
       <DependentUpon>RootTabPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\TabOneChildView.xaml.cs">
+      <DependentUpon>TabOneChildView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\TabOneView.xaml.cs">
+      <DependentUpon>TabOneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\TabTwoChildView.xaml.cs">
+      <DependentUpon>TabTwoChildView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\TabTwoView.xaml.cs">
+      <DependentUpon>TabTwoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MasterDetailRootPage.xaml.cs">
+      <DependentUpon>MasterDetailRootPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -62,21 +65,25 @@
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Navigation\" />
+    <Folder Include="Views\Tabs\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\TabOneView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\TabOneChildView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\TabTwoView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\TabTwoChildView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\RootTabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\TabOneChildView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\TabOneView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\TabTwoChildView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\TabTwoView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MasterDetailRootPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

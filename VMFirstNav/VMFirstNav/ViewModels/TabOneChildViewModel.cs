@@ -16,6 +16,11 @@ namespace VMFirstNav
 			_navService = Locator.CurrentMutable.GetService<INavigationService> ();
 		}
 
+		public void InitializeDisplay(string theTitle)
+		{
+			Title = theTitle;
+		}
+
 		ICommand _navToParent;
 		public ICommand NavigateBack {
 			get {
