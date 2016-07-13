@@ -9,24 +9,72 @@ namespace VMFirstNav
 {
 	public class NavigationService : INavigationService
 	{
+
 		INavigation FormsNavigation
 		{
 			get
 			{
-				var tabController = App.Current.MainPage as TabbedPage;
+				var tabController = Application.Current.MainPage as TabbedPage;
+				var masterController = Application.Current.MainPage as MasterDetailPage;
 
-				if (tabController != null)
-				{
-					return tabController.CurrentPage.Navigation;
-				}
-				else {
-					return Application.Current.MainPage.Navigation;
-				}
+				// First check to see if we're on a tabbed page, then master detail, finally go to overall fallback
+				return tabController?.CurrentPage?.Navigation ?? masterController?.Detail?.Navigation ??
+									 Application.Current.MainPage.Navigation;
 			}
 		}
 
 		// View model to view lookup - making the assumption that view model to view will always be 1:1
 		readonly Dictionary<Type, Type> _viewModelViewDictionary = new Dictionary<Type, Type>();
+
+		#region Replace
+
+		Page DetailPage
+		{
+			get
+			{
+				var masterController = Application.Current.MainPage as MasterDetailPage;
+
+				// Because we're going to do a hard switch of the page, either return
+				// the detail page, or if that's null, then the current main page
+				return masterController?.Detail ?? Application.Current.MainPage;
+			}
+			set
+			{
+				var masterController = Application.Current.MainPage as MasterDetailPage;
+
+				if (masterController != null)
+				{
+					masterController.Detail = value;
+					masterController.IsPresented = false;
+				}
+				else
+				{
+					Application.Current.MainPage = value;
+				}
+			}
+		}
+
+		public void SwitchDetailPage(BaseViewModel viewModel)
+		{
+			var view = InstantiateView(viewModel);
+
+			var nv = new NavigationPage((Page)view);
+
+			DetailPage = nv;
+		}
+
+		public void SwitchDetailPage<T>(Action<T> initialize = null) where T : BaseViewModel
+		{
+			T viewModel;
+
+			// First instantiate the view model
+			viewModel = Activator.CreateInstance<T>();
+
+			// Actually switch the page
+			SwitchDetailPage(viewModel);
+		}
+
+		#endregion
 
 		#region Registration
 
