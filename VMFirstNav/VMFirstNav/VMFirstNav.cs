@@ -11,9 +11,9 @@ namespace VMFirstNav
 		{
 			// The root page of your application
 			var mdRoot = new MasterDetailRootPage();
-			var masterNavPage = new MasterListNavPage();
-			masterNavPage.ViewModel = new MasterListNavViewModel();
-			mdRoot.Master = masterNavPage;
+			//var masterNavPage = new MasterListNavPage();
+			//masterNavPage.ViewModel = new MasterListNavViewModel();
+			//mdRoot.Master = masterNavPage;
 
 			MainPage = mdRoot;
 

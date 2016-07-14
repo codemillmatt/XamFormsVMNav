@@ -18,9 +18,11 @@ namespace VMFirstNav
 		{
 			_navService = Locator.CurrentMutable.GetService<INavigationService>();
 
+			// This is where we add the view models we can navigate to
+			// And the descriptions to be displayed
 			AvailablePages = new List<IMasterListItem<BaseViewModel>>();
-			AvailablePages.Add(new MasterListItem<TabOneViewModel>("Tab One"));
-			AvailablePages.Add(new MasterListItem<TabTwoViewModel>("Tab Two"));
+			AvailablePages.Add(new MasterListItem<NormalOneViewModel>("Normal Nav"));
+			AvailablePages.Add(new MasterListItem<RootTabViewModel>("Tab Pages"));
 
 			Title = "Nav";
 		}

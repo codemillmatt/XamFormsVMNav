@@ -10,6 +10,9 @@ namespace VMFirstNav
 		public MasterDetailRootPage()
 		{
 			InitializeComponent();
+
+			listNav.ViewModel = new MasterListNavViewModel();
+			normalOne.ViewModel = new NormalOneViewModel();
 		}
 	}
 }

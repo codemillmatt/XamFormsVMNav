@@ -2,14 +2,12 @@
 <ContentPage 
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="VMFirstNav.NormalOneChildPage"
+		x:Class="VMFirstNav.NormalModalPage"
 		Title="{Binding Title}">
 	<ContentPage.Content>
-
 		<StackLayout VerticalOptions="Center">
-			<Label XAlign="Center" Text="{Binding Description}"></Label>
-			<Button Text="Show Modal" Command="{Binding NavigatePopup}"/>
-		</StackLayout>		
-
+			<Button Text="Dismiss" Command="{Binding DismissModalCommand}" />
+			<Label XAlign="Center" Text="{Binding Title}"></Label>
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

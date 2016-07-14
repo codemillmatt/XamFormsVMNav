@@ -6,10 +6,13 @@
 		x:Class="VMFirstNav.MasterDetailRootPage">
 
 	<MasterDetailPage.Master>
+		<local:MasterListNavPage x:Name="listNav" Title="Nav" />
 	</MasterDetailPage.Master>
 	<MasterDetailPage.Detail>
 		<NavigationPage>
-			<x:Arguments><local:TabOneView /></x:Arguments>
+			<x:Arguments>
+				<local:NormalOnePage x:Name="normalOne" />
+			</x:Arguments>
 		</NavigationPage>
 	</MasterDetailPage.Detail>
 </MasterDetailPage>

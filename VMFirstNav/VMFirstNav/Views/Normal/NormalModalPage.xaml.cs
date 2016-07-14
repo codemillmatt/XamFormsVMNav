@@ -5,13 +5,13 @@ using Xamarin.Forms;
 
 namespace VMFirstNav
 {
-	public partial class NormalOneChildPage : ContentPage, IViewFor<NormalOneChildViewModel>
+	public partial class NormalModalPage : ContentPage, IViewFor<NormalModalViewModel>
 	{
-
 		#region IViewFor
 
-		NormalOneChildViewModel _vm;
-		public NormalOneChildViewModel ViewModel
+		NormalModalViewModel _vm;
+
+		public NormalModalViewModel ViewModel
 		{
 			get { return _vm; }
 			set
@@ -24,12 +24,15 @@ namespace VMFirstNav
 		object IViewFor.ViewModel
 		{
 			get { return _vm; }
-			set { ViewModel = (NormalOneChildViewModel)value; }
+			set
+			{
+				ViewModel = (NormalModalViewModel)value;
+			}
 		}
 
 		#endregion
 
-		public NormalOneChildPage()
+		public NormalModalPage()
 		{
 			InitializeComponent();
 		}
