@@ -66,6 +66,12 @@
     <Compile Include="Behaviors\ListViewSelectedItemBehavior.cs" />
     <Compile Include="Converters\SelectedItemEventArgsToSelectedItemConverter.cs" />
     <Compile Include="ViewModels\Tabs\RootTabViewModel.cs" />
+    <Compile Include="Views\Normal\NormalOnePage.xaml.cs">
+      <DependentUpon>NormalOnePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Normal\NormalOneChildPage.xaml.cs">
+      <DependentUpon>NormalOneChildPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -81,6 +87,8 @@
     <Folder Include="Models\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Converters\" />
+    <Folder Include="Views\Normal\" />
+    <Folder Include="ViewModels\Normal\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RootTabPage.xaml">
@@ -102,6 +110,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MasterDetail\MasterListNavPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Normal\NormalOnePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Normal\NormalOneChildPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
