@@ -2,7 +2,14 @@
 <MasterDetailPage 
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:local="clr-namespace:VMFirstNav;assembly=VMFirstNav"
 		x:Class="VMFirstNav.MasterDetailRootPage">
 
-
+	<MasterDetailPage.Master>
+	</MasterDetailPage.Master>
+	<MasterDetailPage.Detail>
+		<NavigationPage>
+			<x:Arguments><local:TabOneView /></x:Arguments>
+		</NavigationPage>
+	</MasterDetailPage.Detail>
 </MasterDetailPage>
