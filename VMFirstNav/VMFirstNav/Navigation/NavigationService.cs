@@ -77,6 +77,7 @@ namespace VMFirstNav
 
 			// First instantiate the view model
 			viewModel = Activator.CreateInstance<T>();
+			initialize?.Invoke(viewModel);
 
 			// Actually switch the page
 			SwitchDetailPage(viewModel);
