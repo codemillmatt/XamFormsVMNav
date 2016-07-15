@@ -38,8 +38,6 @@ namespace VMFirstNav
 			{
 				var masterController = Application.Current.MainPage as MasterDetailPage;
 
-				// Because we're going to do a hard switch of the page, either return
-				// the detail page, or if that's null, then the current main page
 				return masterController?.Detail ?? Application.Current.MainPage;
 			}
 			set
