@@ -68,10 +68,6 @@ namespace VMFirstNav
 			else
 				newDetailPage = new NavigationPage((Page)view);
 
-			//var nv = new NavigationPage((Page)view);
-
-			//DetailPage = nv;
-
 			DetailPage = newDetailPage;
 		}
 
