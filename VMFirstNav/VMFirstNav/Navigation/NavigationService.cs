@@ -18,9 +18,9 @@ namespace VMFirstNav
 				var masterController = Application.Current.MainPage as MasterDetailPage;
 
 				// First check to see if we're on a tabbed page, then master detail, finally go to overall fallback
-				return tabController?.CurrentPage?.Navigation ?? 
-					                 (masterController?.Detail as TabbedPage)?.CurrentPage?.Navigation ?? // special consideration for a tabbed page inside master/detail
-					                 masterController?.Detail?.Navigation ??
+				return tabController?.CurrentPage?.Navigation ??
+									 (masterController?.Detail as TabbedPage)?.CurrentPage?.Navigation ?? // special consideration for a tabbed page inside master/detail
+									 masterController?.Detail?.Navigation ??
 									 Application.Current.MainPage.Navigation;
 			}
 		}
@@ -30,6 +30,8 @@ namespace VMFirstNav
 
 		#region Replace
 
+		// Because we're going to do a hard switch of the page, either return
+		// the detail page, or if that's null, then the current main page		
 		Page DetailPage
 		{
 			get
@@ -64,7 +66,7 @@ namespace VMFirstNav
 
 			// Tab pages shouldn't go into navigation pages
 			if (view is TabbedPage)
-				newDetailPage = (Page)view;				
+				newDetailPage = (Page)view;
 			else
 				newDetailPage = new NavigationPage((Page)view);
 
