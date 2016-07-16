@@ -20,8 +20,10 @@ namespace VMFirstNav
 		public ICommand NavigateToChild {
 			get {
 				if (_navToChild == null) {
-					_navToChild = new Command (async () => 
-						await _navService.PushAsync (new TabOneChildViewModel ())
+					_navToChild = new Command (async () =>
+					{
+						await _navService.PushAsync<TabOneChildViewModel>((vm) => vm.InitializeDisplay("Title from initialization routine"));
+					}
 					);
 				}
 				return _navToChild;

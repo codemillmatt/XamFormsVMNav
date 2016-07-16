@@ -10,7 +10,14 @@ namespace VMFirstNav
 		public App ()
 		{
 			// The root page of your application
-			MainPage = new RootTabPage();
+			var mdRoot = new MasterDetailRootPage();
+			//var masterNavPage = new MasterListNavPage();
+			//masterNavPage.ViewModel = new MasterListNavViewModel();
+			//mdRoot.Master = masterNavPage;
+
+			MainPage = mdRoot;
+
+				//MainPage = new MasterDetailRootPage();//RootTabPage();
 		}
 
 		protected override void OnStart ()

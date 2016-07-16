@@ -9,72 +9,171 @@ namespace VMFirstNav
 {
 	public class NavigationService : INavigationService
 	{
-		INavigation FormsNavigation { 
-			get {
-				var tabController = App.Current.MainPage as TabbedPage;
 
-				if (tabController != null) {
-					return tabController.CurrentPage.Navigation;
-				} else {
-					return App.Current.MainPage.Navigation;
-				}
+		INavigation FormsNavigation
+		{
+			get
+			{
+				var tabController = Application.Current.MainPage as TabbedPage;
+				var masterController = Application.Current.MainPage as MasterDetailPage;
+
+				// First check to see if we're on a tabbed page, then master detail, finally go to overall fallback
+				return tabController?.CurrentPage?.Navigation ??
+									 (masterController?.Detail as TabbedPage)?.CurrentPage?.Navigation ?? // special consideration for a tabbed page inside master/detail
+									 masterController?.Detail?.Navigation ??
+									 Application.Current.MainPage.Navigation;
 			}
 		}
 
 		// View model to view lookup - making the assumption that view model to view will always be 1:1
-		readonly Dictionary<Type, Type> _viewModelViewDictionary = new Dictionary<Type, Type> ();
+		readonly Dictionary<Type, Type> _viewModelViewDictionary = new Dictionary<Type, Type>();
 
-		public void RegisterViewModels (System.Reflection.Assembly asm)
+		#region Replace
+
+		// Because we're going to do a hard switch of the page, either return
+		// the detail page, or if that's null, then the current main page		
+		Page DetailPage
 		{
-			// Loop through everything in the assembley that implements IViewFor<T>
-			foreach (var type in asm.DefinedTypes.Where(dt => !dt.IsAbstract &&
-				dt.ImplementedInterfaces.Any(ii => ii == typeof(IViewFor)))) {
+			get
+			{
+				var masterController = Application.Current.MainPage as MasterDetailPage;
 
-				// Get the IViewFor<T> portion of the type that implements it
-				var viewForType = type.ImplementedInterfaces.FirstOrDefault (
-					ii => ii.IsConstructedGenericType &&
-					ii.GetGenericTypeDefinition () == typeof(IViewFor<>));
+				return masterController?.Detail ?? Application.Current.MainPage;
+			}
+			set
+			{
+				var masterController = Application.Current.MainPage as MasterDetailPage;
 
-				// Register it, using the T as the key and the view as the value
-				Register (viewForType.GenericTypeArguments [0], type.AsType ());
+				if (masterController != null)
+				{
+					masterController.Detail = value;
+					masterController.IsPresented = false;
+				}
+				else
+				{
+					Application.Current.MainPage = value;
+				}
 			}
 		}
 
-		public void Register (Type viewModelType, Type viewType)
+		public void SwitchDetailPage(BaseViewModel viewModel)
 		{
-			_viewModelViewDictionary.Add (viewModelType, viewType);
+			var view = InstantiateView(viewModel);
+
+			Page newDetailPage;
+
+			// Tab pages shouldn't go into navigation pages
+			if (view is TabbedPage)
+				newDetailPage = (Page)view;
+			else
+				newDetailPage = new NavigationPage((Page)view);
+
+			DetailPage = newDetailPage;
 		}
 
-		public async Task PopAsync ()
-		{				
-			await FormsNavigation.PopAsync (true);
-		}
-
-		public async Task PopModalAsync ()
-		{			
-			await FormsNavigation.PopModalAsync (true);
-		}
-
-		public async Task PushAsync (BaseViewModel viewModel)
+		public void SwitchDetailPage<T>(Action<T> initialize = null) where T : BaseViewModel
 		{
-			var view = InstantiateView (viewModel);
+			T viewModel;
 
-			await FormsNavigation.PushAsync ((Page)view);
+			// First instantiate the view model
+			viewModel = Activator.CreateInstance<T>();
+			initialize?.Invoke(viewModel);
+
+			// Actually switch the page
+			SwitchDetailPage(viewModel);
 		}
 
-		public async Task PushModalAsync (BaseViewModel viewModel)
+		#endregion
+
+		#region Registration
+
+		public void RegisterViewModels(System.Reflection.Assembly asm)
 		{
-			var view = InstantiateView (viewModel);
+			// Loop through everything in the assembley that implements IViewFor<T>
+			foreach (var type in asm.DefinedTypes.Where(dt => !dt.IsAbstract &&
+				dt.ImplementedInterfaces.Any(ii => ii == typeof(IViewFor))))
+			{
 
-			await FormsNavigation.PushModalAsync ((Page)view);
+				// Get the IViewFor<T> portion of the type that implements it
+				var viewForType = type.ImplementedInterfaces.FirstOrDefault(
+					ii => ii.IsConstructedGenericType &&
+					ii.GetGenericTypeDefinition() == typeof(IViewFor<>));
+
+				// Register it, using the T as the key and the view as the value
+				Register(viewForType.GenericTypeArguments[0], type.AsType());
+			}
 		}
 
-		public async Task PopToRootAsync ()
+		public void Register(Type viewModelType, Type viewType)
 		{
-			await FormsNavigation.PopToRootAsync (true);
+			_viewModelViewDictionary.Add(viewModelType, viewType);
 		}
 
-		private IViewFor InstantiateView(BaseViewModel viewModel)
+		#endregion
+
+		#region Pop
+
+		public async Task PopAsync()
+		{
+			await FormsNavigation.PopAsync(true);
+		}
+
+		public async Task PopModalAsync()
+		{
+			await FormsNavigation.PopModalAsync(true);
+		}
+
+		public async Task PopToRootAsync(bool animate)
+		{
+			await FormsNavigation.PopToRootAsync(animate);
+		}
+
+		#endregion
+
+		#region Push
+
+		public async Task PushAsync(BaseViewModel viewModel)
+		{
+			var view = InstantiateView(viewModel);
+
+			await FormsNavigation.PushAsync((Page)view);
+		}
+
+		public async Task PushModalAsync(BaseViewModel viewModel)
+		{
+			var view = InstantiateView(viewModel);
+
+			// Most likely we're going to want to put this into a navigation page so we can have a title bar on it
+			var nv = new NavigationPage((Page)view);
+
+			await FormsNavigation.PushModalAsync(nv);
+		}
+
+		public async Task PushAsync<T>(Action<T> initialize = null) where T : BaseViewModel
+		{
+			T viewModel;
+
+			// Instantiate the view model & invoke the initialize method, if any
+			viewModel = Activator.CreateInstance<T>();
+			initialize?.Invoke(viewModel);
+
+			await PushAsync(viewModel);
+		}
+
+		public async Task PushModalAsync<T>(Action<T> initialize = null) where T : BaseViewModel
+		{
+			T viewModel;
+
+			// Instantiate the view model & invoke the initialize method, if any
+			viewModel = Activator.CreateInstance<T>();
+			initialize?.Invoke(viewModel);
+
+			await PushModalAsync(viewModel);
+		}
+
+		#endregion
+
+		IViewFor InstantiateView(BaseViewModel viewModel)
 		{
 			// Figure out what type the view model is
 			var viewModelType = viewModel.GetType();
@@ -88,7 +187,7 @@ namespace VMFirstNav
 			view.ViewModel = viewModel;
 
 			return view;
-		}			
+		}
 	}
 }
 

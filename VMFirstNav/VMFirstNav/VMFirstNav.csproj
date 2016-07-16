@@ -35,47 +35,96 @@
     <Compile Include="Views\IViewFor.cs" />
     <Compile Include="Navigation\INavigationService.cs" />
     <Compile Include="Navigation\NavigationService.cs" />
-    <Compile Include="ViewModels\TabOneViewModel.cs" />
-    <Compile Include="ViewModels\TabOneChildViewModel.cs" />
-    <Compile Include="ViewModels\TabTwoViewModel.cs" />
-    <Compile Include="ViewModels\TabTwoChildViewModel.cs" />
-    <Compile Include="Views\TabOneView.xaml.cs">
-      <DependentUpon>TabOneView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabOneChildView.xaml.cs">
-      <DependentUpon>TabOneChildView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabTwoView.xaml.cs">
-      <DependentUpon>TabTwoView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabTwoChildView.xaml.cs">
-      <DependentUpon>TabTwoChildView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\RootTabPage.xaml.cs">
       <DependentUpon>RootTabPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tabs\TabOneChildView.xaml.cs">
+      <DependentUpon>TabOneChildView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\TabOneView.xaml.cs">
+      <DependentUpon>TabOneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\TabTwoChildView.xaml.cs">
+      <DependentUpon>TabTwoChildView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tabs\TabTwoView.xaml.cs">
+      <DependentUpon>TabTwoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MasterDetailRootPage.xaml.cs">
+      <DependentUpon>MasterDetailRootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MasterDetail\MasterListNavPage.xaml.cs">
+      <DependentUpon>MasterListNavPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Tabs\TabOneChildViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\TabOneViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\TabTwoChildViewModel.cs" />
+    <Compile Include="ViewModels\Tabs\TabTwoViewModel.cs" />
+    <Compile Include="ViewModels\MasterDetail\MasterListNavViewModel.cs" />
+    <Compile Include="Models\IMasterListItem.cs" />
+    <Compile Include="Models\MasterListItem.cs" />
+    <Compile Include="Behaviors\ListViewSelectedItemBehavior.cs" />
+    <Compile Include="Converters\SelectedItemEventArgsToSelectedItemConverter.cs" />
+    <Compile Include="ViewModels\Tabs\RootTabViewModel.cs" />
+    <Compile Include="Views\Normal\NormalOnePage.xaml.cs">
+      <DependentUpon>NormalOnePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Normal\NormalOneChildPage.xaml.cs">
+      <DependentUpon>NormalOneChildPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Normal\NormalModalPage.xaml.cs">
+      <DependentUpon>NormalModalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Normal\NormalModalViewModel.cs" />
+    <Compile Include="ViewModels\Normal\NormalOneChildViewModel.cs" />
+    <Compile Include="ViewModels\Normal\NormalOneViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Navigation\" />
+    <Folder Include="Views\Tabs\" />
+    <Folder Include="Views\MasterDetail\" />
+    <Folder Include="ViewModels\Tabs\" />
+    <Folder Include="ViewModels\MasterDetail\" />
+    <Folder Include="Models\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Views\Normal\" />
+    <Folder Include="ViewModels\Normal\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\TabOneView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\TabOneChildView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\TabTwoView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\TabTwoChildView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\RootTabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\TabOneChildView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\TabOneView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\TabTwoChildView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Tabs\TabTwoView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MasterDetailRootPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MasterDetail\MasterListNavPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Normal\NormalOnePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Normal\NormalOneChildPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Normal\NormalModalPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -83,17 +132,17 @@
     <Reference Include="MvvmHelpers">
       <HintPath>..\packages\Refractored.MvvmHelpers.1.0.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\MvvmHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="Splat">
-      <HintPath>..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\packages\Xamarin.Forms.2.0.1.6505\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.0.107\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\packages\Xamarin.Forms.2.0.1.6505\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.0.107\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\packages\Xamarin.Forms.2.0.1.6505\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.3.0.107\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

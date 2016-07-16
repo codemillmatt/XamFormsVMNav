@@ -19,10 +19,12 @@ namespace VMFirstNav
 		ICommand _navToChild;
 		public ICommand NavigateToChild {
 			get {
-				if (_navToChild == null) {
-					_navToChild = new Command (async () => 
-						await _navService.PushAsync (new TabTwoChildViewModel ())
-					);
+				if (_navToChild == null)
+				{
+					_navToChild = new Command(async () =>
+					{
+						await _navService.PushAsync<TabTwoChildViewModel>();
+					});
 				}
 				return _navToChild;
 			}

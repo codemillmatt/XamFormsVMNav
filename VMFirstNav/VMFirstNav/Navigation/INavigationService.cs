@@ -12,8 +12,12 @@ namespace VMFirstNav
 		Task PopAsync();
 		Task PopModalAsync();
 		Task PushAsync(BaseViewModel viewModel);
+		Task PushAsync<T>(Action<T> initialize = null) where T : BaseViewModel;
+		Task PushModalAsync<T>(Action<T> initialize = null) where T : BaseViewModel;
 		Task PushModalAsync(BaseViewModel viewModel);
-		Task PopToRootAsync();
+		Task PopToRootAsync(bool animate);
+		void SwitchDetailPage<T>(Action<T> initialize = null) where T : BaseViewModel;
+		void SwitchDetailPage(BaseViewModel viewModel);
 	}
 }
 
